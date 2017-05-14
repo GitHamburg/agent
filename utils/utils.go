@@ -39,7 +39,8 @@ func checkTargetStatus(item *webg.DetectedItem) (itemCheckResult *webg.CheckResu
 		Creator:  item.Creator,
 		Tag:      item.Tag,
 		Target:   item.Target,
-		Ip:       item.Ip,
+		//Ip:       item.Ip,
+		Ip:       g.Config.Ip,
 		RespTime: item.Timeout,
 		RespCode: "0",
 	}
@@ -68,6 +69,9 @@ func checkTargetStatus(item *webg.DetectedItem) (itemCheckResult *webg.CheckResu
 
 	respTime := int(time.Now().Sub(reqStartTime).Nanoseconds() / 1000000)
 	itemCheckResult.RespTime = respTime
+
+	respLen := resp.ContentLength
+	itemCheckResult.RespLen = respLen
 
 	if respTime > item.Timeout {
 		itemCheckResult.Status = REQ_TIMEOUT

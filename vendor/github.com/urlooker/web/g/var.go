@@ -36,6 +36,7 @@ type CheckResult struct {
 	Status   int64  `json:"status"`
 	PushTime int64  `json:"push_time"`
 	Ip       string `json:"ip"`
+	RespLen  int64  `json:"resp_len"`
 }
 
 type DetectedItemSafeMap struct {
