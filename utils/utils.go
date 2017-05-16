@@ -78,7 +78,7 @@ func checkTargetStatus(item *webg.DetectedItem) (itemCheckResult *webg.CheckResu
 		if err != nil {
 			break
 		}
-		res_size += n
+		res_size += int64(n)
 	}
 	respLen := res_size
 	itemCheckResult.RespLen = respLen
