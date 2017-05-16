@@ -72,7 +72,7 @@ func checkTargetStatus(item *webg.DetectedItem) (itemCheckResult *webg.CheckResu
 
 	buf := make([]byte, 1024)
 	//1024为缓存大小，即每次读出的最大数据
-	res_size := 0
+	var res_size int64 = 0
 	for {
 		n, err := resp.Body.Read(buf) //为这次读出的数据大小
 		if err != nil {
