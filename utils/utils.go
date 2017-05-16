@@ -70,7 +70,17 @@ func checkTargetStatus(item *webg.DetectedItem) (itemCheckResult *webg.CheckResu
 	respTime := int(time.Now().Sub(reqStartTime).Nanoseconds() / 1000000)
 	itemCheckResult.RespTime = respTime
 
-	respLen := resp.ContentLength
+	buf := make([]byte, 1024)
+	//1024为缓存大小，即每次读出的最大数据
+	res_size := 0
+	for {
+		n, err := resp.Body.Read(buf) //为这次读出的数据大小
+		if err != nil {
+			break
+		}
+		res_size += n
+	}
+	respLen := res_size
 	itemCheckResult.RespLen = respLen
 
 	if respTime > item.Timeout {
